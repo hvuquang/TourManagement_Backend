@@ -24,6 +24,28 @@ const authController = {
             res.status(500).json(error);
         }
     },
+    //GENARATE ACCESS TOKEN
+    genarateAccessToken: (user)=>{
+        return jwt.sign(
+            {
+                id: user.id,
+                admin: user.admin
+            },
+            process.env.JWT_ACCESS_KEY,
+            { expiresIn: "2h" }
+        );
+    },
+    //GENARATE REFRESH TOKEN
+    genarateRefreshToken: (user) => {
+        return jwt.sign(
+            {
+                id: user.id,
+                admin: user.admin
+            },
+            process.env.JWT_ACCESS_KEY,
+            { expiresIn: "365d" }
+        );
+    },
     //Login
     loginUser: async(req,res)=>{
         try {
@@ -38,15 +60,10 @@ const authController = {
                 res.status(400).json("Sai mật khẩu!");
             if(user && validPassword)
             {
-                const accessToken = jwt.sign(
-                {
-                    id: user.id,
-                    admin: user.admin
-                },
-                process.env.JWT_ACCESS_KEY,
-                {expiresIn: "30s"}
-                );
-                res.status(200).json({user,accessToken});
+                const accessToken = authController.genarateAccessToken(user);
+                const refreshToken = authController.genarateRefreshToken(user);
+                const {password, ...others} = user._doc;
+                res.status(200).json({...others,accessToken,refreshToken});
             }
         } catch (error) {
             res.status(500).json(error)
