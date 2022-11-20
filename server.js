@@ -5,6 +5,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
+const postRoutes = require('./routes/post');
 
 dotenv.config();
 const app = express();
@@ -21,6 +22,7 @@ app.use(express.json());
 //routes
 app.use("/v1/auth",authRoutes);
 app.use("/v1/user",userRoutes);
+app.use("/v1/post",postRoutes);
 
 
 app.listen(8000,()=>{
