@@ -10,7 +10,7 @@ const postSchema = mongoose.Schema({
         required : true
     },
     imgURLs : {
-        type : Array,
+        type : String,
         required : true,
     }
 },{timestamps:true})

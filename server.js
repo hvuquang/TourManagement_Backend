@@ -18,6 +18,7 @@ mongoose.connect(process.env.MONGODB_URL,()=>{
 app.use(cors());
 app.use(cookieParser());//tạo cookie gắn cookie
 app.use(express.json());
+app.use('/uploads',express.static('uploads'))
 
 //routes
 app.use("/v1/auth",authRoutes);
