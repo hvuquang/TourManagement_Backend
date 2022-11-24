@@ -20,7 +20,16 @@ const postController = {
         } catch (error) {
             res.status(500).json(error);
         }
+    },
+    readPost: async(req,res) => {
+        try{
+            const posts= await postModel.find({});
+            res.status(200).json(posts);
+        } catch (error) {
+            res.status(500).json(error);
+        }
     }
+
 }
 
 module.exports = postController;
