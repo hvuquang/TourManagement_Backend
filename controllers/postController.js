@@ -28,6 +28,17 @@ const postController = {
         } catch (error) {
             res.status(500).json(error);
         }
+    },
+    likePost: async(req , res)=>{
+        try {
+            const id = req.body._id;
+            const post = await postModel.findById(id);
+            post.like = post.like + 1;
+            post.save();
+            res.status(200).json(post)
+        } catch (error) {
+            res.status(500).json(error)
+        }
     }
 
 }
