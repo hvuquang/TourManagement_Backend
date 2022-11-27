@@ -39,14 +39,7 @@ const postController = {
         } catch (error) {
             res.status(500).json(error)
         }
-    }
-    try {
-      await post.save();
-      res.send(post);
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  },
+    },
   readPost: async (req, res) => {
     try {
       const posts = await postModel.find({});
