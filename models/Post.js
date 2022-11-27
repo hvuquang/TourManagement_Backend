@@ -12,6 +12,10 @@ const postSchema = mongoose.Schema({
     imgURLs : {
         type : String,
         required : true,
+    },
+    like: {
+        type: Number,
+        default: 0
     }
 },{timestamps:true})
 
