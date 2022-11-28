@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const postRoutes = require('./routes/post');
+const { updatePost } = require('./controllers/postController');
 
 dotenv.config();
 const app = express();
@@ -24,6 +25,7 @@ app.use('/uploads',express.static('uploads'))
 app.use("/v1/auth",authRoutes);
 app.use("/v1/user",userRoutes);
 app.use("/v1/post",postRoutes);
+
 
 
 app.listen(8000,()=>{

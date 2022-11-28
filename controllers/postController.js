@@ -63,6 +63,27 @@ const postController = {
         });
       });
   },
+  updatePost: async(req, res)=>{
+    const postID=req.body.postID
+    let updateData={
+        title: req.body.title,
+        des:req.body.des,
+        imgURLs:req.body.imgURLs
+    }
+    
+    postModel
+    .findByIdAndUpdate(postID,{$set: updateData})
+    .then(()=>{
+        res.json({
+            message:"Post updated successfully!"
+        })
+    })
+    .catch(error=>{
+        res.json({
+            message:'An error Occured!'
+        })
+    })
+  },
 };
 
 module.exports = postController;
