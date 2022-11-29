@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const postRoutes = require('./routes/post');
+const swaggerUI = require('swagger-ui-express');
+const swaggerJSDOC = require('swagger-jsdoc')
 
 dotenv.config();
 const app = express();
@@ -19,11 +21,30 @@ app.use(cors());
 app.use(cookieParser());//tạo cookie gắn cookie
 app.use(express.json());
 app.use('/uploads',express.static('uploads'))
+const options = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Travel Blog API',
+            version: '1.0.0'
+        },
+        servers: [
+            {
+                url: 'http://localhost:8000/'
+            }
+        ]
+    },
+    apis: ['./routes/*.js']
+}
+
+const swaggerSpec = swaggerJSDOC(options)
+app.use('/api-doc', swaggerUI.serve, swaggerUI.setup(swaggerSpec))
 
 //routes
 app.use("/v1/auth",authRoutes);
 app.use("/v1/user",userRoutes);
 app.use("/v1/post",postRoutes);
+
 
 
 app.listen(8000,()=>{
