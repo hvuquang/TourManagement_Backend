@@ -3,8 +3,6 @@ const router = require('express').Router();
 const upload = require('../middleware/upload');
 
 
-router.post('/addPost', upload.array('imgURLs') , postController.addPost);
-
 /**
  * @swagger
  *  components:
@@ -24,11 +22,16 @@ router.post('/addPost', upload.array('imgURLs') , postController.addPost);
  *                     type: string
  */
 
+
+router.post('/addPost', upload.array('imgURLs') , postController.addPost);
+
 /**
  * @swagger
  * /v1/post/readPost:
  *    get:
- *       summary: API này dùng để lấy tất cả các bài Post từ MongoDB
+ *       tags:
+ *         - Post:
+ *       summary: API này dùng để lấy tất cả các bài Post
  *       responses: 
  *             200:
  *                description: 
@@ -40,6 +43,26 @@ router.post('/addPost', upload.array('imgURLs') , postController.addPost);
  *                                 $ref : '#components/schemas/Post'
  */
 router.get('/readPost', postController.readPost);
+
+/**
+ * @swagger
+ * /v1/post/deletePost:
+ *   delete:
+ *     tags:
+ *        - Post:
+ *     summary: API này dùng để xóa bài Post
+ *     requestBody:
+ *           required: true
+ *           content: 
+ *               application/json:
+ *                   schema:
+ *                       $ref : '#components/schemas/Post'
+ *     responses: 
+ *             200:
+ *                description: Post deleted successfully
+ *             500:
+ *                description: Failed to delete post
+ */
 router.delete('/deletePost', postController.deletePost);
 
 
@@ -47,7 +70,9 @@ router.delete('/deletePost', postController.deletePost);
  * @swagger
  * /v1/post/likePost:
  *  put:
- *     summary: API này dùng để cập nhật dữ liệu tới Mongodb
+ *     tags:
+ *        - Post:
+ *     summary: API này dùng để cập nhật dữ liệu
  *     requestBody:
  *           required: true
  *           content: 
