@@ -9,6 +9,7 @@ const postRoutes = require('./routes/post');
 const swaggerUI = require('swagger-ui-express');
 const swaggerJSDOC = require('swagger-jsdoc')
 
+
 dotenv.config();
 const app = express();
 

@@ -90,5 +90,6 @@ router.delete('/deletePost', postController.deletePost);
  *                                 $ref : '#components/schemas/Post'
  */
 router.put('/likePost',postController.likePost);
+router.post('/updatePost', postController.updatePost);
 
 module.exports = router;
