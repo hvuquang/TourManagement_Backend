@@ -91,5 +91,4 @@ router.delete('/deletePost', postController.deletePost);
  */
 router.put('/likePost',postController.likePost);
 
-
 module.exports = router;

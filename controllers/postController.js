@@ -1,3 +1,4 @@
+const path = require("path");
 const postModel = require("../models/Post");
 
 const postController = {
