@@ -6,6 +6,7 @@ const postController = {
         const post = new postModel({
             title: req.body.title,
             des: req.body.des,
+            owner: req.body.owner
         })
         if(req.files){
             let path = '';

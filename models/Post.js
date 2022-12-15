@@ -16,6 +16,9 @@ const postSchema = mongoose.Schema({
     like: {
         type: Number,
         default: 0
+    },
+    owner: {
+        type: String,
     }
 },{timestamps:true})
 
