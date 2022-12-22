@@ -22,6 +22,30 @@ const upload = require('../middleware/upload');
  *                     type: string
  */
 
+/**
+ * @swagger
+ * /v1/post/addPost:
+ *    post:
+ *       tags:
+ *         - Post:
+ *       summary: API này dùng để thêm bài post
+ *       description : 
+ *       requestBody:
+ *           required: true
+ *           content: 
+ *               application/json:
+ *                   schema:
+ *                       $ref : '#components/schemas/Post'
+ *       responses: 
+ *             200:
+ *                description: 
+ *                content:
+ *                   application/json:
+ *                          schema:
+ *                             type: array
+ *                             items: 
+ *                                 $ref : '#components/schemas/Post'
+ */
 
 router.post('/addPost', upload.array('imgURLs') , postController.addPost);
 
