@@ -1,5 +1,4 @@
 const path = require("path");
-const Post = require("../models/Post");
 const postModel = require("../models/Post");
 
 const postController = {
@@ -45,7 +44,7 @@ const postController = {
     },
     deletePost: async (req, res) => {
         try {
-          const post = await Post.findByIdAndDelete(req.params.id, req.body);
+          const post = await postModel.findByIdAndDelete(req.params.id, req.body);
           if (!post) res.status(404).send("Không tìm thấy dữ liệu");
           res.status(200).send();
         } catch (error) {
@@ -54,13 +53,13 @@ const postController = {
       },
   updatePost: async (req, res) => {
     try {
-        const post = await Post.findByIdAndUpdate(req.params.id, req.body);
+        const post = await postModel.findByIdAndUpdate(req.params.id, req.body);
         await post.save();
         res.send(post);
     } catch (error) {
         res.status(500).send(error);
     }
-},
+    }
 };
 
 module.exports = postController;
