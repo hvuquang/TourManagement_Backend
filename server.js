@@ -9,6 +9,7 @@ const postRoutes = require('./routes/post');
 const swaggerUI = require('swagger-ui-express');
 const swaggerJSDOC = require('swagger-jsdoc')
 
+let port = process.env.PORT || 8000
 
 dotenv.config();
 const app = express();
@@ -46,9 +47,14 @@ app.use("/v1/auth",authRoutes);
 app.use("/v1/user",userRoutes);
 app.use("/v1/post",postRoutes);
 
+//test
+app.get('/', (req,res) => {
+    console.log('Hello World')
+    res.send("Hello my friend")
+})
 
 
-app.listen(8000,()=>{
+app.listen(port,()=>{
     console.log('Server is running');
 })
 
