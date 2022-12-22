@@ -23,6 +23,10 @@ const userSchema = mongoose.Schema({
     admin:{
         type:Boolean,
         default:false
+    },
+    sl_post:{
+        type:Number,
+        default:0
     }
 },{timestamps:true}
 );

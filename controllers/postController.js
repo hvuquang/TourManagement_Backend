@@ -42,42 +42,24 @@ const postController = {
             res.status(500).json(error)
         }
     },
-  deletePost: async (req, res) => {
-    const postID = req.body.postID;
-    postModel
-      .findByIdAndDelete(postID)
-      .then(() => {
-        res.json({
-          message: "Post deleted successfully",
-        });
-      })
-      .catch((error) => {
-        res.json({
-          message: "Failed to delete post",
-        });
-      });
-  },
-  updatePost: async(req, res)=>{
-    const postID=req.body.postID
-    let updateData={
-        title: req.body.title,
-        des:req.body.des,
-        imgURLs:req.body.imgURLs
+    deletePost: async (req, res) => {
+        try {
+          const post = await postModel.findByIdAndDelete(req.params.id, req.body);
+          if (!post) res.status(404).send("Không tìm thấy dữ liệu");
+          res.status(200).send();
+        } catch (error) {
+          res.status(500).send(error);
+        }
+      },
+  updatePost: async (req, res) => {
+    try {
+        const post = await postModel.findByIdAndUpdate(req.params.id, req.body);
+        await post.save();
+        res.send(post);
+    } catch (error) {
+        res.status(500).send(error);
     }
-    
-    postModel
-    .findByIdAndUpdate(postID,{$set: updateData})
-    .then(()=>{
-        res.json({
-            message:"Post updated successfully!"
-        })
-    })
-    .catch(error=>{
-        res.json({
-            message:'An error Occured!'
-        })
-    })
-  },
+    }
 };
 
 module.exports = postController;

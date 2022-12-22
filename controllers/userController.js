@@ -18,7 +18,30 @@ const userController = {
         } catch (error) {
             res.status(500).json(error);
         }
+    },
+    tangPost: async(req , res)=>{
+        try {
+            const id = req.body._id;
+            const user = await User.findById(id)
+            user.sl_post = user.sl_post + 1;
+            user.save()
+            res.status(200).json(user)
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    },
+    giamPost: async(req , res)=>{
+        try {
+            const id = req.body._id;
+            const user = await User.findById(id)
+            user.sl_post = user.sl_post - 1;
+            user.save()
+            res.status(200).json(user)
+        } catch (error) {
+            res.status(500).json(error)
+        }
     }
+    
 }
 
 module.exports = userController;
