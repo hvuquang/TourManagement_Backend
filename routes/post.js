@@ -63,7 +63,7 @@ router.get('/readPost', postController.readPost);
  *             500:
  *                description: Failed to delete post
  */
-router.delete('/deletePost', postController.deletePost);
+router.delete('/deletePost/:id', postController.deletePost);
 
 
 /**
@@ -90,6 +90,6 @@ router.delete('/deletePost', postController.deletePost);
  *                                 $ref : '#components/schemas/Post'
  */
 router.put('/likePost',postController.likePost);
-router.post('/updatePost', postController.updatePost);
+router.post('/updatePost/:id', postController.updatePost);
 
 module.exports = router;
